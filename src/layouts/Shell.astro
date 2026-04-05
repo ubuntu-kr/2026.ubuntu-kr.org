@@ -85,45 +85,48 @@ const m = useTranslations(getLangFromUrl(Astro.url));
                     }
                 </div>
             </div>
+            <nav class="grid-row" aria-label="Footer">
+                <div class="has-cookie">
+                    <p>
+                        {WebsiteConfig.footer.copyright}
+                    </p>
+                    <ul class="p-inline-list--middot">
+                        <li class="p-inline-list__item">
+                            <a href={WebsiteConfig.footer.contactUs}>
+                                <small>{m("footer_contact")}</small>
+                            </a>
+                        </li>
+                        <li class="p-inline-list__item">
+                            <a href={WebsiteConfig.footer.srcRepoUrl}>
+                                <small>{m("footer_source")}</small>
+                            </a>
+                        </li>
+                        <li class="p-inline-list__item">
+                            <a href="https://ubucon.org">
+                                <small>{m("footer_ubucons")}</small>
+                            </a>
+                        </li>
+                        <li class="p-inline-list__item">
+                            <small>{m("footer_other_years")}</small>
+                            <a href="https://2023.ubuntu-kr.org">
+                                <small>2023</small>
+                            </a>
+                            <a href="https://2024.ubuntu-kr.org">
+                                <small>2024</small>
+                            </a>
+                            <a href="https://2025.ubuntu-kr.org">
+                                <small>2025</small>
+                            </a>
+                        </li>
+                    </ul>
+                    <span class="ukc-floating-ui">
+                        <button onclick="body.scrollIntoView({ behavior: 'smooth' })" aria-label={m("footer_top")}>
+                            <i class="p-icon--chevron-up" />
+                        </button>
+                    </span>
+                </div>
+            </nav>
         </div>
-        <nav class="grid-row" aria-label="Footer">
-            <div class="has-cookie">
-                <p>
-                    {WebsiteConfig.footer.copyright}
-                </p>
-                <ul class="p-inline-list--middot">
-                    <li class="p-inline-list__item">
-                        <a href={WebsiteConfig.footer.contactUs}
-                            ><small>{m("footer_contact")}</small></a
-                        >
-                    </li>
-                    <li class="p-inline-list__item">
-                        <a href={WebsiteConfig.footer.srcRepoUrl}
-                            ><small>{m("footer_source")}</small></a
-                        >
-                    </li>
-                    <li class="p-inline-list__item">
-                        <a href="https://ubucon.org"
-                            ><small>{m("footer_ubucons")}</small></a
-                        >
-                    </li>
-                    <li class="p-inline-list__item">
-                        <small>{m("footer_other_years")}</small>
-                        <a href="https://2023.ubuntu-kr.org"
-                            ><small>2023</small></a
-                        >
-                        <a href="https://2024.ubuntu-kr.org"
-                            ><small>2024</small></a
-                        >
-                        <a href="https://2025.ubuntu-kr.org"
-                            ><small>2025</small></a
-                        >
-                    </li>
-                </ul>
-                <span class="u-off-screen"
-                    ><a href="#">{m("footer_top")}</a></span
-                >
-            </div>
-        </nav>
+        
     </footer>
 </Layout>
