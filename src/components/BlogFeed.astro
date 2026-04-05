@@ -1,7 +1,7 @@
 ---
 import { WebsiteConfig } from "../config";
-import * as m from "../paraglide/messages.js";
 import jsdom from "jsdom";
+import { getLangFromUrl, useTranslations } from "../i18n/utils.ts";
 const { JSDOM } = jsdom;
 const window = new JSDOM().window;
 const blogFeedRaw = await fetch(WebsiteConfig.blog.rssFeedUrl);
@@ -23,9 +23,11 @@ blogItemsXml.forEach((el: Element) => {
 blogItems.sort((a, b) => {
   if (Date.parse(a.date) > Date.parse(b.date))
     return -1;
-  else
+    else
     return 1;
 });
+
+const m = useTranslations(getLangFromUrl(Astro.url));
 ---
 
 <div class="row--25-75-on-large">
@@ -34,7 +36,7 @@ blogItems.sort((a, b) => {
       <a target="_blank"
         href={blogItems.length > 0 ? WebsiteConfig.blog.viewMoreUrl : WebsiteConfig.blog.viewMoreUrlAlternative}>
         <h2 class="p-link--soft">
-          {m.blogBanner_title()}
+          {m("blogBanner_title")}
         </h2>
       </a>
     </div>
@@ -59,7 +61,7 @@ blogItems.sort((a, b) => {
             </div>
         )) : <div class="p-equal-height-row__col">
             <p class="p-equal-height-row__item">
-              {m.blogBanner_empty()}
+              {m("blogBanner_empty")}
             </p>
           </div>
           }

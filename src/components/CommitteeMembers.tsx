@@ -1,14 +1,21 @@
 import { committeeMembers } from "@data/committeeMembers";
-import * as m from "../paraglide/messages.js";
+import { getLangFromUrl, useTranslations, type Locale, type TranslationKey } from "../i18n/utils.ts";
 import { useState, type FormEvent } from "react";
+import { defaultLang } from "src/i18n/ui.ts";
 
 export default function CommitteeMembers() {
+    const currentLocale: Locale = typeof window !== "undefined"
+        ? getLangFromUrl(new URL(window.location.href))
+        : defaultLang;
+    const m = useTranslations(currentLocale);
+    const getMemberRoles = (memberRoles: TranslationKey[]) => memberRoles.map((role) => m(role));
+
     const [memberList, setMemberList] = useState(committeeMembers);
 
     function searchMember(keyword: string) {
         setMemberList(committeeMembers.filter((member) =>
             member.name.includes(keyword) ||
-            member.role.join().includes(keyword)
+            getMemberRoles(member.role).join().includes(keyword)
         ));
     }
 
@@ -19,10 +26,10 @@ export default function CommitteeMembers() {
     return (
         <section className="grid-col-8">
         <form className="p-search-box u-no-print" onSubmit={(e) => {e.preventDefault()}}>
-            <label className="u-off-screen" htmlFor="search">{m.role_search()}</label>
-            <input type="search" id="search" className="p-search-box__input" name="search" placeholder={m.role_search()} autoComplete="on" onChange={(e) => searchMember(e.currentTarget.value)} />
-            <button type="reset" className="p-search-box__reset" onClick={resetMember}><i className="p-icon--close">{m.role_close()}</i></button>
-            <button type="submit" className="p-search-box__button"><i className="p-icon--search">{m.role_search()}</i></button>
+            <label className="u-off-screen" htmlFor="search">{m("role_search")}</label>
+            <input type="search" id="search" className="p-search-box__input" name="search" placeholder={m("role_search")} autoComplete="on" onChange={(e) => searchMember(e.currentTarget.value)} />
+            <button type="reset" className="p-search-box__reset" onClick={resetMember}><i className="p-icon--close">{m("role_close")}</i></button>
+            <button type="submit" className="p-search-box__button"><i className="p-icon--search">{m("role_search")}</i></button>
         </form>
 
         <ul className="row">
@@ -42,7 +49,7 @@ export default function CommitteeMembers() {
                             <p className="p-media-object__content">
                                 {member.role.map((role, idx) => (
                                     <span className={`u-no-margin--bottom ${idx === 0 ? "p-chip--information" : "p-chip"}`} key={idx}>
-                                        {role}
+                                        {m(role)}
                                     </span>
                                 ))}
                             </p>

@@ -2,13 +2,14 @@
 import Layout from '@layouts/Layout.astro';
 import Navigation from '@components/Navigation.astro';
 import LocaleSwither from '@components/LocaleSwither.astro';
-import * as m from "../paraglide/messages.js";
 import { WebsiteConfig } from "../config";
+import { getLangFromUrl, useTranslations } from "../i18n/utils.ts";
 interface Props {
 	title?: string;
 }
 
 const { title } = Astro.props;
+const m = useTranslations(getLangFromUrl(Astro.url));
 ---
 
 <Layout title={title}>
@@ -93,21 +94,21 @@ const { title } = Astro.props;
                 <ul class="p-inline-list--middot">
                     <li class="p-inline-list__item">
                         <a href={WebsiteConfig.footer.contactUs}
-                            ><small>{m.footer_contact()}</small></a
+                            ><small>{m("footer_contact")}</small></a
                         >
                     </li>
                     <li class="p-inline-list__item">
                         <a href={WebsiteConfig.footer.srcRepoUrl}
-                            ><small>{m.footer_source()}</small></a
+                            ><small>{m("footer_source")}</small></a
                         >
                     </li>
                     <li class="p-inline-list__item">
                         <a href="https://ubucon.org"
-                            ><small>{m.footer_ubucons()}</small></a
+                            ><small>{m("footer_ubucons")}</small></a
                         >
                     </li>
                     <li class="p-inline-list__item">
-                        <small>{m.footer_other_years()}</small>
+                        <small>{m("footer_other_years")}</small>
                         <a href="https://2023.ubuntu-kr.org"
                             ><small>2023</small></a
                         >
@@ -117,10 +118,9 @@ const { title } = Astro.props;
                     </li>
                 </ul>
                 <span class="u-off-screen"
-                    ><a href="#">{m.footer_top()}</a></span
+                    ><a href="#">{m("footer_top")}</a></span
                 >
             </div>
         </nav>
     </footer>
 </Layout>
-

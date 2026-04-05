@@ -1,10 +1,13 @@
 
 
-import * as m from "./paraglide/messages.js";
+import { getLangFromUrl, useTranslations } from "./i18n/utils.ts";
 import UCKLogo from './assets/logo.svg';
 import MicrosoftKoreaVenueImage from '@assets/hall.jpg';
 import UbuntuKoreaLogo from "@assets/UbuntuKorea.svg";
 import UbuntuKorea20th from "@assets/UbuntuKorea20th.svg";
+
+const createTranslation = (locale: string) =>
+    useTranslations(getLangFromUrl(new URL(`/${locale}`, "https://example.org")));
 
 export interface SubMenuItem {
     link: string;
@@ -18,76 +21,79 @@ export const WebsiteConfig = {
         "twitter": "UbuntuKrOrg"
     },
     faviconPath: UCKLogo.src,
-    navigation: (locale: string) => [
-        {
-            label: m.nav_about(),
-            link: `/${locale}/about`,
-            childs: []
-        },
-        {
-            label: m.nav_venue_safety(),
-            link: `/${locale}/venue-and-safety`,
-            childs: []
-        },
-        {
-            label: m.nav_programs(),
-            link: "#",
-            childs: [
-                {
-                    label: m.nav_programs_cfp(),
-                    link: "/cfp"
-                },
-                {
-                    label: m.nav_programs_timetable(),
-                    link: `/${locale}/programs/timetable`
-                },
-                {
-                    label: m.nav_programs_speakers(),
-                    link: "https://events.canonical.com/event/126/contributions/speakers"
-                },
-                {
-                    label: m.nav_programs_social(),
-                    link: "https://github.com/ubuntu-kr/ksp-toolkits/blob/master/ksp/ksp-20250809/readme.md"
-                },
-                {
-                    label: m.nav_programs_lunch(),
-                    link: `/${locale}/programs/lunch`
-                }
-            ]
-        },
-        {
-            label: m.nav_sponsors(),
-            link: "#",
-            childs: [
-                {
-                    label: m.nav_sponsors_become(),
-                    link: `/${locale}/sponsors/become-a-sponsor/`
-                },
-                {
-                    label: m.nav_sponsors_our(),
-                    link: `/${locale}/sponsors/our-sponsors/`
-                },
-                {
-                    label: m.nav_sponsors_patrons(),
-                    link: `/${locale}/sponsors/patrons/`
-                }
-            ]
-        },
-        {
-            label: m.nav_links(),
-            link: "#",
-            childs: [
-                {
-                    label: m.nav_links_news(),
-                    link: "https://discourse.ubuntu-kr.org/c/notice/9",
-                },
-                {
-                    label: m.nav_links_chat(),
-                    link: "https://ubuntu-kr.org/chat/",
-                }
-            ]
-        }
-    ],
+    navigation: (locale: string) => {
+        const m = createTranslation(locale);
+        return [
+            {
+                label: m("nav_about"),
+                link: `/${locale}/about`,
+                childs: []
+            },
+            {
+                label: m("nav_venue_safety"),
+                link: `/${locale}/venue-and-safety`,
+                childs: []
+            },
+            {
+                label: m("nav_programs"),
+                link: "#",
+                childs: [
+                    {
+                        label: m("nav_programs_cfp"),
+                        link: "/cfp"
+                    },
+                    {
+                        label: m("nav_programs_timetable"),
+                        link: `/${locale}/programs/timetable`
+                    },
+                    {
+                        label: m("nav_programs_speakers"),
+                        link: "https://events.canonical.com/event/126/contributions/speakers"
+                    },
+                    {
+                        label: m("nav_programs_social"),
+                        link: "https://github.com/ubuntu-kr/ksp-toolkits/blob/master/ksp/ksp-20250809/readme.md"
+                    },
+                    {
+                        label: m("nav_programs_lunch"),
+                        link: `/${locale}/programs/lunch`
+                    }
+                ]
+            },
+            {
+                label: m("nav_sponsors"),
+                link: "#",
+                childs: [
+                    {
+                        label: m("nav_sponsors_become"),
+                        link: `/${locale}/sponsors/become-a-sponsor/`
+                    },
+                    {
+                        label: m("nav_sponsors_our"),
+                        link: `/${locale}/sponsors/our-sponsors/`
+                    },
+                    {
+                        label: m("nav_sponsors_patrons"),
+                        link: `/${locale}/sponsors/patrons/`
+                    }
+                ]
+            },
+            {
+                label: m("nav_links"),
+                link: "#",
+                childs: [
+                    {
+                        label: m("nav_links_news"),
+                        link: "https://discourse.ubuntu-kr.org/c/notice/9",
+                    },
+                    {
+                        label: m("nav_links_chat"),
+                        link: "https://ubuntu-kr.org/chat/",
+                    }
+                ]
+            }
+        ];
+    },
     subNavigation: [
         {
             label: "🎟️",
@@ -108,25 +114,28 @@ export const WebsiteConfig = {
     },
     mainBanner: {
         showFootnote: true,
-        buttons: (locale: string) => [
-            {
-                label: m.nav_register(),
-                link: `/tickets`,
-                class: "p-button--positive",
-                target: "_blank"
-            },
-            {
-                label: m.nav_check_ticket(),
-                link: "https://event-us.kr/mypage/allevent",
-                class: "p-button",
-                target: "_blank"
-            },
-            {
-                label: m.nav_programs_timetable(),
-                link: `/${locale}/programs/timetable`,
-                class: "p-button"
-            }
-        ],
+        buttons: (locale: string) => {
+            const m = createTranslation(locale);
+            return [
+                {
+                    label: m("nav_register"),
+                    link: `/tickets`,
+                    class: "p-button--positive",
+                    target: "_blank"
+                },
+                {
+                    label: m("nav_check_ticket"),
+                    link: "https://event-us.kr/mypage/allevent",
+                    class: "p-button",
+                    target: "_blank"
+                },
+                {
+                    label: m("nav_programs_timetable"),
+                    link: `/${locale}/programs/timetable`,
+                    class: "p-button"
+                }
+            ]
+        },
         logo: UCKLogo
     },
     featuredSpeakers: {

@@ -1,14 +1,5 @@
 ---
-import "vanilla-framework/_index.scss";
 import Shell from "@layouts/Shell.astro";
-
-import type { MarkdownLayoutProps } from 'astro';
-
-type Props = MarkdownLayoutProps<{
-  // Define frontmatter props here
-  title: string;
-  description: string;
-}>;
 
 
 const { frontmatter } = Astro.props;

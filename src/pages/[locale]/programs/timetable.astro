@@ -1,9 +1,8 @@
 ---
 import { getRelativeLocaleUrlList } from 'astro:i18n';
 import { WebsiteConfig } from "../../../config";
-import * as m from "../../../paraglide/messages.js";
 import Shell from "../../../layouts/Shell.astro"
-import { languageTag } from '../../../paraglide/runtime';
+import { getLangFromUrl, useTranslations, type TranslationKey } from "../../../i18n/utils.ts";
 
 export function getStaticPaths() {
 	return getRelativeLocaleUrlList().map((locale) => {
@@ -27,11 +26,13 @@ const contResJson = await contResponse.json();
 const fullSessionInfo = contResJson.results
     ? contResJson.results[0].contributions
     : null;
+const m = useTranslations(getLangFromUrl(Astro.url));
 
 const halls = WebsiteConfig.timetable.halls;
-const lastUpdate = new Intl.DateTimeFormat(languageTag(), { 
+const lastUpdate = new Intl.DateTimeFormat(getLangFromUrl(Astro.url), { 
   dateStyle: "long", timeStyle: "full", timeZone: "Asia/Seoul"
 }).format(new Date());
+const getHallLabel = (hall: string) => m(`timetable_${hall}` as TranslationKey);
 
 sessions.sort(function(a:any, b: any) {
   const aTime = Date.parse(`${a.startDate.date}T${a.startDate.time}Z`);
@@ -45,34 +46,33 @@ sessions.sort(function(a:any, b: any) {
 });
 ---
 
-<Shell title={m.nav_programs_timetable()}>
+<Shell title={m("nav_programs_timetable")}>
 <div class="p-section p-strip is-shallow">
     <div class="grid-row">
-        <h1>{m.nav_programs_timetable()}</h1>
-        <p>{m.timetable_description()}</p>
+        <h1>{m("nav_programs_timetable")}</h1>
+        <p>{m("timetable_description")}</p>
         <hr class="p-rule">
         <p id="timetable-guide" class="grid-col-8">
           <span id="table-guide">
             <span class="timetable-index">
               <span class="difficulty">★</span>
-              <span>{m.timetable_difficulty()}</span>
+              <span>{m("timetable_difficulty")}</span>
             </span>
             <span class="timetable-index">
               <span class="featured">●</span>
-              <span>{m.timetable_featured()}</span>
+              <span>{m("timetable_featured")}</span>
             </span>
           </span>
           <span class="timetable-index">
             <i class="p-icon--show" />
-            <span class="index-title">{m.timetable_update()}</span>
+            <span class="index-title">{m("timetable_update")}</span>
             <span>{lastUpdate}</span>
           </span>
         </p>
         <section class="p-tabs">
           <div class="p-tabs__list u-no-print" role="tablist" aria-label="timetable">
             {halls.map((hall, idx) => {
-              const key = `timetable_${hall}` as keyof typeof m;
-              const label = typeof m[key] === "function" ? (m[key] as () => string)() : "";
+              const label = getHallLabel(hall);
               return (
                 <div class="p-tabs__item">
                   <button class="p-tabs__link" role="tab" aria-selected={idx === 0 ? "true" : "false"} aria-controls={`${hall}-tab`} id={hall} tabindex={idx === 0 ? "0" : "-1"}>
@@ -83,19 +83,18 @@ sessions.sort(function(a:any, b: any) {
             })}
             <div class="p-tabs__item" tabindex="-1">
               <a class="p-tabs__link" id="full" href={WebsiteConfig.timetable.showDetails} target="_blank">
-                <span>{m.timetable_full()}(Indico)</span>
+                <span>{m("timetable_full")}(Indico)</span>
                 <i class="p-icon--external-link" />
               </a>
             </div>
           </div>
 
           {halls.map((hall, idx) => {
-            const key = `timetable_${hall}` as keyof typeof m;
-            const label = typeof m[key] === "function" ? (m[key] as () => string)() : "";
+            const label = getHallLabel(hall);
             return (
               <table tabindex="0" role="tabpanel" id={`${hall}-tab`} aria-labelledby={hall} hidden={idx !== 0 ? "hidden" : ""} class="u-table-layout--auto">
                 <thead>
-                  <th>{m.timetable_time()}</th>
+                  <th>{m("timetable_time")}</th>
                   <th>{label}</th>
                 </thead>
                 <tbody>
@@ -343,4 +342,3 @@ document.addEventListener('DOMContentLoaded', function() {
     align-items: center;
   }
 </style>
-

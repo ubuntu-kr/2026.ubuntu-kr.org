@@ -6,8 +6,8 @@ import Sponsors from '@components/Sponsors.astro';
 import BlogFeed from '@components/BlogFeed.astro';
 import { WebsiteConfig } from '../../config';
 import { getRelativeLocaleUrlList } from 'astro:i18n';
-import * as m from "../../paraglide/messages.js";
 import { Image } from 'astro:assets';
+import { getLangFromUrl, useTranslations } from "../../i18n/utils.ts";
 
 export function getStaticPaths() {
 	return getRelativeLocaleUrlList().map((locale) => {
@@ -18,6 +18,7 @@ export function getStaticPaths() {
 	});
 }
 
+const m = useTranslations(getLangFromUrl(Astro.url));
 
 ---
 
@@ -30,9 +31,9 @@ export function getStaticPaths() {
 				</div>
 		  	<div class="row--50-50">
 				<div class="col">
-					<h2>{m.videoBanner_title()}</h2>
-					<p>{m.videoBanner_description1()}</p>
-					<p>{m.videoBanner_description2()}</p>
+					<h2>{m("videoBanner_title")}</h2>
+					<p>{m("videoBanner_description1")}</p>
+					<p>{m("videoBanner_description2")}</p>
 				</div>
 				<div class="col">
 					<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/HGX_ZmVOVUE?si=VBBdLjlA7PcwVeIb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -60,15 +61,15 @@ export function getStaticPaths() {
 		</div>
 		<div class="col">
 			<div class="p-section--shallow">
-			<h2>{m.travelBanner_title()}</h2>
+			<h2>{m("travelBanner_title")}</h2>
 			</div>
 			<div class="p-section--shallow">
 			<p>
-				{m.travelBanner_description()}
+				{m("travelBanner_description")}
 			</p>
 			</div>
 			<ul class="p-list--divided">
-				<li class="p-list__item is-ticked"><a href="./venue-and-safety">{m.travelBanner_listitem4()}</a></li>
+				<li class="p-list__item is-ticked"><a href="./venue-and-safety">{m("travelBanner_listitem4")}</a></li>
 			</ul>
 		</div>
 		</div>
@@ -76,4 +77,3 @@ export function getStaticPaths() {
 	<BlogFeed/>
 	<Sponsors/>
 </Shell>
-

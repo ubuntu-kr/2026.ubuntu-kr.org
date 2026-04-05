@@ -1,16 +1,23 @@
-import * as m from "../paraglide/messages.js";
 import uck25Logo from "@assets/logo.svg";
 import hoehyeongProfile from "@assets/committiee/hoehyeong.jpg";
 import inahProfile from "@assets/committiee/inahHwang.jpeg";
 import euiseoProfile from "@assets/committiee/euiseo.jpg";
+import type { TranslationKey } from "../i18n/utils.ts";
 
-export const committeeMembers = [
+type CommitteeMember = {
+    name: string;
+    team: string;
+    role: TranslationKey[];
+    profileImageUrl: string;
+};
+
+export const committeeMembers: CommitteeMember[] = [
     {
         name: "Junsang Mun",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_venue_safety(),
-            m.role_marketing_design()
+            "role_venue_safety",
+            "role_marketing_design"
         ],
         profileImageUrl: "https://discourse.ubuntu-kr.org/user_avatar/discourse.ubuntu-kr.org/junmoon/144/12427_2.png"
     },
@@ -18,11 +25,11 @@ export const committeeMembers = [
         name: "Youngbin Han",
         team: "Ubuntu Korea Community, Ubuntu LoCo Council",
         role: [
-            m.role_sponsorship_finances(),
-            m.role_general(),
-            m.role_contents(),
-            m.role_web_video(),
-            m.role_venue_safety()
+            "role_sponsorship_finances",
+            "role_general",
+            "role_contents",
+            "role_web_video",
+            "role_venue_safety"
         ],
         profileImageUrl: "https://avatars.githubusercontent.com/u/1916739?v=4",
     },
@@ -30,9 +37,9 @@ export const committeeMembers = [
         name: "Minseong Cho",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_general(),
-            m.role_venue_safety(),
-            m.role_sponsorship_finances()
+            "role_general",
+            "role_venue_safety",
+            "role_sponsorship_finances"
         ],
         profileImageUrl: "https://avatars.githubusercontent.com/u/52643858?v=4"
     },
@@ -40,9 +47,9 @@ export const committeeMembers = [
         name: "Sangbin Lim",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_marketing_design(),
-            m.role_web_video(),
-            m.role_venue_safety()
+            "role_marketing_design",
+            "role_web_video",
+            "role_venue_safety"
         ],
         profileImageUrl: "https://avatars.githubusercontent.com/u/125565943?v=4"
     },
@@ -50,8 +57,8 @@ export const committeeMembers = [
         name: "Jungmin Yoon",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_web_video(),
-            m.role_marketing_design()
+            "role_web_video",
+            "role_marketing_design"
         ],
         profileImageUrl: "https://avatars.githubusercontent.com/u/7126454?v=4"
     },
@@ -59,8 +66,8 @@ export const committeeMembers = [
         name: "Giyeon Bang",
         team: "C++ Korea",
         role: [
-            m.role_web_video(),
-            m.role_venue_safety()
+            "role_web_video",
+            "role_venue_safety"
         ],
         profileImageUrl: "https://2022.ubucon.asia/about/giyeon_bang.jpg"
     },
@@ -68,8 +75,8 @@ export const committeeMembers = [
         name: "Gyuseok Jung",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_contents(),
-            m.role_web_video()
+            "role_contents",
+            "role_web_video"
         ],
         profileImageUrl: "https://avatars.githubusercontent.com/u/9061758?v=4"
     },
@@ -77,8 +84,8 @@ export const committeeMembers = [
         name: "Sangkon Han",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_contents(),
-            m.role_web_video()
+            "role_contents",
+            "role_web_video"
         ],
         profileImageUrl: "https://2022.ubucon.asia/about/sangkon_han.jpg"
     },
@@ -86,8 +93,8 @@ export const committeeMembers = [
         name: "Yeonguk Choo",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_venue_safety(),
-            m.role_sponsorship_finances()
+            "role_venue_safety",
+            "role_sponsorship_finances"
         ],
         profileImageUrl: "https://discourse.ubuntu-kr.org/user_avatar/discourse.ubuntu-kr.org/choo121600/144/12050_2.png"
     },
@@ -95,8 +102,8 @@ export const committeeMembers = [
         name: "Hoehyeong Jung",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_web_video(),
-            m.role_contents()
+            "role_web_video",
+            "role_contents"
         ],
         profileImageUrl: hoehyeongProfile.src
     },
@@ -104,9 +111,9 @@ export const committeeMembers = [
         name: "Tae Yong Lee",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_venue_safety(),
-            m.role_contents(),
-            m.role_sponsorship_finances()
+            "role_venue_safety",
+            "role_contents",
+            "role_sponsorship_finances"
         ],
         profileImageUrl: "https://2024.ubuntu-kr.org/avatars/taeyong.jpg"
     },
@@ -114,8 +121,8 @@ export const committeeMembers = [
         name: "Soyeon Kwon",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_marketing_design(),
-            m.role_web_video()
+            "role_marketing_design",
+            "role_web_video"
         ],
         profileImageUrl: "https://2024.ubuntu-kr.org/avatars/soyeon.png"
     },
@@ -123,8 +130,8 @@ export const committeeMembers = [
         name: "Euiseo Cha",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_sponsorship_finances(),
-            m.role_contents()
+            "role_sponsorship_finances",
+            "role_contents"
         ],
         profileImageUrl: euiseoProfile.src
     },
@@ -132,7 +139,7 @@ export const committeeMembers = [
         name: "Inah Hwang",
         team: "Ubuntu Korea Community",
         role: [
-            m.role_sponsorship_finances()
+            "role_sponsorship_finances"
         ],
         profileImageUrl: inahProfile.src
     },
@@ -140,7 +147,7 @@ export const committeeMembers = [
         name: "Han Lim",
         team: "",
         role: [
-            m.role_sponsorship_finances()
+            "role_sponsorship_finances"
         ],
         profileImageUrl: uck25Logo.src
     }

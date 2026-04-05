@@ -1,11 +1,14 @@
 ---
 import { sponsors } from "@data/sponsors";
-import * as m from "../paraglide/messages.js";
 import SponsorLogoAndModal from "@components/SponsorLogoAndModal.tsx";
+import { getLangFromUrl, useTranslations } from "../i18n/utils.ts";
+
+const locale = getLangFromUrl(Astro.url);
+const m = useTranslations(locale);
 ---
 
 <div class="p-section">
-    <div class="row"><h2>{m.our_sponsors()}</h2></div>
+    <div class="row"><h2>{m("our_sponsors")}</h2></div>
     {
         sponsors.map((level) => (
         <div class="p-section--shallow">
@@ -27,6 +30,7 @@ import SponsorLogoAndModal from "@components/SponsorLogoAndModal.tsx";
                                         description={item.description ?? ""}
                                         url={item.url}
                                         level={level.sponsorLevelName}
+                                        locale={locale}
                                         showPopup={level.showPopup}
                                         client:only="react" />
                                 </div>

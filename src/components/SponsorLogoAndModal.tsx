@@ -1,17 +1,19 @@
 
 import { useState, type MouseEvent } from "react";
-import * as m from "../paraglide/messages.js";
 import Markdown from "marked-react";
+import { useTranslations, type Locale } from "../i18n/utils.ts";
 type SponsorLogoAndModalProps = {
     name: string,
     level: string,
     logoImageSrc: string,
+    locale: Locale,
     description: string,
     url: string,
     showPopup: Boolean,
     index: number
 }
 export default function SponsorLogoAndModal(props: SponsorLogoAndModalProps) {
+    const m = useTranslations(props.locale);
     const [modalOpen, setModalOpen] = useState(false);
     const closeHandler = (e: KeyboardEvent|MouseEvent<HTMLButtonElement>) => {
         if (e.type === "click" || (e as KeyboardEvent).key === "Escape") {
@@ -35,7 +37,7 @@ export default function SponsorLogoAndModal(props: SponsorLogoAndModalProps) {
             <div className="p-modal" id={`modal-${props.level}-${props.index}`} style={{display: modalOpen && props.showPopup ? "flex" : "none"}}>
             <section className="p-modal__dialog" role="dialog" aria-modal={modalOpen && props.showPopup ? "true":"false"} aria-labelledby="modal-title" aria-describedby="modal-description">
                 <header className="p-modal__header">
-                    <h2 className="p-modal__title" id={`modal-${props.level}-${props.level}-title`}>{m.sponsor_about()}</h2>
+                    <h2 className="p-modal__title" id={`modal-${props.level}-${props.level}-title`}>{m("sponsor_about")}</h2>
                     <button className="p-modal__close" aria-label="Close active modal" aria-controls="modal" onClick={closeHandler}>Close</button>
                 </header>
                 <img src={props.logoImageSrc} alt={props.name} loading="lazy" decoding="async" style={props.level !== "Community" ? { width: "100%" } : { maxHeight: "10rem" }} />
@@ -45,7 +47,7 @@ export default function SponsorLogoAndModal(props: SponsorLogoAndModalProps) {
                     {props.description}
                 </Markdown>
                 <footer className="p-modal__footer">
-                <a href={props.url} target="_blank"><button className="p-button--positive u-no-margin--bottom">{m.visit_website()}</button></a>
+                <a href={props.url} target="_blank"><button className="p-button--positive u-no-margin--bottom">{m("visit_website")}</button></a>
                 </footer>
             </section>
             </div>
