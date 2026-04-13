@@ -148,17 +148,17 @@ export const WebsiteConfig = {
     //     ],
         fullSchedulesUrl: "https://events.canonical.com/event/126/contributions/"
     },
-    // timetable: {
-    //     halls: ["jeju", "donghae", "dokdo"],
-    //     indicoExportUrl: "https://events.canonical.com/export/timetable/126.json",
-    //     baseUrl: "https://events.canonical.com",
-    //     showDetails: "https://events.canonical.com/event/126/timetable/?layout=room",
-    //     difficulty: {
-    //         beginner: [4, 5, 6, 8, 10, 11, 13, 18, 19, 25, 30],
-    //         intermediate: [9, 3, 12, 2, 1],
-    //         advanced: [20, 16]
-    //     }
-    // },
+    timetable: {
+        halls: ["jeju", "donghae", "dokdo"],
+        indicoExportUrl: "https://events.canonical.com/export/timetable/126.json",
+        baseUrl: "https://events.canonical.com",
+        showDetails: "https://events.canonical.com/event/126/timetable/?layout=room",
+        difficulty: {
+            beginner: [4, 5, 6, 8, 10, 11, 13, 18, 19, 25, 30],
+            intermediate: [9, 3, 12, 2, 1],
+            advanced: [20, 16]
+        }
+    },
     cityBanner: {
         cityImage: MicrosoftKoreaVenueImage
     },
