@@ -2,7 +2,8 @@
 import { getRelativeLocaleUrlList } from 'astro:i18n';
 import { WebsiteConfig } from "../../../config";
 import Shell from "../../../layouts/Shell.astro"
-import { getLangFromUrl, useTranslations, type TranslationKey } from "../../../i18n/utils.ts";
+import { useTranslations, type TranslationKey } from "../../../i18n/utils.ts";
+import { extractLocaleFromUrl } from "../../../paraglide/runtime";
 
 export function getStaticPaths() {
 	return getRelativeLocaleUrlList().map((locale) => {
@@ -26,10 +27,11 @@ const contResJson = await contResponse.json();
 const fullSessionInfo = contResJson.results
     ? contResJson.results[0].contributions
     : null;
-const m = useTranslations(getLangFromUrl(Astro.url));
+const locale = extractLocaleFromUrl(Astro.url);
+const m = useTranslations(locale);
 
 const halls = WebsiteConfig.timetable.halls;
-const lastUpdate = new Intl.DateTimeFormat(getLangFromUrl(Astro.url), { 
+const lastUpdate = new Intl.DateTimeFormat(locale, { 
   dateStyle: "long", timeStyle: "full", timeZone: "Asia/Seoul"
 }).format(new Date());
 const getHallLabel = (hall: string) => m(`timetable_${hall}` as TranslationKey);

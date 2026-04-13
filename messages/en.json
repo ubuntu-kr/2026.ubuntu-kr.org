@@ -1,8 +1,11 @@
 {
+    "$schema": "https://inlang.com/schema/inlang-message-format",
+    "mainBanner_cohost": "with MiniDebConf Korea",
     "mainBanner_dates": "August 29, 2026",
     "mainBanner_venue": "Microsoft Korea 13F",
     "mainBanner_description": "UbuCon Korea, the annual event of the Ubuntu Korea community, is the largest gathering of Ubuntu users and contributors in Korea. This summer, we invite every developers, engineers, creators, researchers, entrepreneurs, and enthusiasts to join us again!",
     "mainBanner_footnote": "* To be confirmed",
+    "mainBanner_lastyear": "Watch last year videos",
     "mainBanner_earlybird": "Get Early Bird Discount",
     "videoBanner_title": "An event for people with Ubuntu and FOSS in common",
     "videoBanner_description1": "UbuCon Korea, an annual event by Ubuntu Korea Community brings together people with diverse backgrounds across Asia with one thing in common: Ubuntu and FOSS - to explore what we can do with Ubuntu and FOSS and how we can contribute to its projects and communities.",
@@ -68,7 +71,6 @@
     "timetable_full": "Show All",
     "timetable_time": "Time",
     "timetable_12f": "Floor 12",
-    
     "timetable_duration": "Duration",
     "timetable_update": "Last Modified",
     "timetable_speaker": "Speaker(s)",

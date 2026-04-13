@@ -1,10 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import { WebsiteConfig } from "../config";
-import { getLangFromUrl, useTranslations } from "../i18n/utils.ts";
-import { defaultLang } from "src/i18n/ui";
+import { useTranslations } from "../i18n/utils.ts";
+import { extractLocaleFromUrl } from "../paraglide/runtime";
 
-const m = useTranslations(getLangFromUrl(Astro.url));
+const locale = extractLocaleFromUrl(Astro.url);
+const m = useTranslations(locale);
 ---
 <div class="p-suru--fan-bottom">
     <div class="row--75-25">
@@ -14,7 +15,7 @@ const m = useTranslations(getLangFromUrl(Astro.url));
         <h2>{m("mainBanner_venue")}</h2>
         <p>{m("mainBanner_description")}</p>
         <p><small>{WebsiteConfig.mainBanner.showFootnote ? m("mainBanner_footnote") :""}</small></p>
-        {WebsiteConfig.mainBanner.buttons(Astro.currentLocale ?? defaultLang).map((buttonConfig)=>(
+        {WebsiteConfig.mainBanner.buttons(locale).map((buttonConfig)=>(
             <a href={buttonConfig.link} target={buttonConfig.target ?? "_self"}>
                 <button class={buttonConfig.class} style={{ marginBottom: "0.25rem" }}>
                     {buttonConfig.label}

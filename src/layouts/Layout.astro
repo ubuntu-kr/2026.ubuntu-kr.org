@@ -1,6 +1,6 @@
 ---
 import { WebsiteConfig } from "../config";
-import { getLangFromUrl } from "src/i18n/utils";
+import { extractLocaleFromUrl } from "../paraglide/runtime";
 
 interface Props {
 	title?: string;
@@ -11,7 +11,7 @@ const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang={getLangFromUrl(Astro.url)}>
+	<html lang={extractLocaleFromUrl(Astro.url)}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description ? description : WebsiteConfig.siteDescription} />

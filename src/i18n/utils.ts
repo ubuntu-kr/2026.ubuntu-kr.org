@@ -1,16 +1,18 @@
-import { ui, defaultLang } from './ui';
+import { extractLocaleFromUrl, baseLocale, toLocale, type Locale } from '../paraglide/runtime';
+import { m as messages } from '../paraglide/messages.js';
 
-export type Locale = keyof typeof ui;
-export type TranslationKey = keyof typeof ui[typeof defaultLang];
+export type MessageKey = keyof typeof messages;
+export type MessageFunction = (
+  inputs?: Record<string, never>,
+  options?: { locale?: Locale }
+) => string;
+export type TranslationKey = MessageKey;
+export type { Locale };
 
-export function getLangFromUrl(url: URL): Locale {
-  const [, lang] = url.pathname.split('/');
-  if (lang in ui) return lang as Locale;
-  return defaultLang;
-}
+export function useTranslations(locale?: Locale) {
+  const resolvedLocale = toLocale(locale) ?? baseLocale;
 
-export function useTranslations(lang: Locale) {
-  return function t(key: TranslationKey) {
-    return ui[lang][key] || ui[defaultLang][key];
-  }
+  return function t(key: MessageKey) {
+    return (messages[key] as MessageFunction)({}, { locale: resolvedLocale });
+  };
 }

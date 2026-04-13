@@ -1,9 +1,10 @@
 ---
 import { sponsors } from "@data/sponsors";
 import SponsorLogoAndModal from "@components/SponsorLogoAndModal.tsx";
-import { getLangFromUrl, useTranslations } from "../i18n/utils.ts";
+import { useTranslations } from "../i18n/utils.ts";
+import { extractLocaleFromUrl } from "../paraglide/runtime";
 
-const locale = getLangFromUrl(Astro.url);
+const locale = extractLocaleFromUrl(Astro.url);
 const m = useTranslations(locale);
 ---
 

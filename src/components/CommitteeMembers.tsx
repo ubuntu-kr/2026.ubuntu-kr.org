@@ -1,12 +1,12 @@
 import { committeeMembers } from "@data/committeeMembers";
-import { getLangFromUrl, useTranslations, type Locale, type TranslationKey } from "../i18n/utils.ts";
-import { useState, type FormEvent } from "react";
-import { defaultLang } from "src/i18n/ui.ts";
+import { useTranslations, type Locale, type TranslationKey } from "../i18n/utils.ts";
+import { useState} from "react";
+import { baseLocale, extractLocaleFromUrl } from "../paraglide/runtime";
 
 export default function CommitteeMembers() {
     const currentLocale: Locale = typeof window !== "undefined"
-        ? getLangFromUrl(new URL(window.location.href))
-        : defaultLang;
+        ? extractLocaleFromUrl(new URL(window.location.href)) ?? baseLocale
+        : baseLocale;
     const m = useTranslations(currentLocale);
     const getMemberRoles = (memberRoles: TranslationKey[]) => memberRoles.map((role) => m(role));
 

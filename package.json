@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "paraglide-js compile --project ./project.inlang --outdir ./src/paraglide && astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -23,5 +23,8 @@
     "react-dom": "^19.2.4",
     "typescript": "^5.9.3",
     "vanilla-framework": "^4.46.0"
+  },
+  "devDependencies": {
+    "@inlang/paraglide-js": "^2.15.3"
   }
 }

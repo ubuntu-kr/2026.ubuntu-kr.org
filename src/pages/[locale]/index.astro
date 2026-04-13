@@ -5,9 +5,11 @@ import FeaturedSpeakers from '@components/FeaturedSpeakers.astro';
 import Sponsors from '@components/Sponsors.astro';
 import BlogFeed from '@components/BlogFeed.astro';
 import { WebsiteConfig } from '../../config';
-import { getRelativeLocaleUrlList } from 'astro:i18n';
+import { useTranslations } from "../../i18n/utils.ts";
+import { extractLocaleFromUrl } from "../../paraglide/runtime";
+
 import { Image } from 'astro:assets';
-import { getLangFromUrl, useTranslations } from "../../i18n/utils.ts";
+import { getRelativeLocaleUrlList } from 'astro:i18n';
 
 export function getStaticPaths() {
 	return getRelativeLocaleUrlList().map((locale) => {
@@ -18,7 +20,8 @@ export function getStaticPaths() {
 	});
 }
 
-const m = useTranslations(getLangFromUrl(Astro.url));
+const locale = extractLocaleFromUrl(Astro.url);
+const m = useTranslations(locale);
 
 ---
 
@@ -36,7 +39,7 @@ const m = useTranslations(getLangFromUrl(Astro.url));
 					<p>{m("videoBanner_description2")}</p>
 				</div>
 				<div class="col">
-					<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/XZiOjSOwQDA?si=Z6HVE-qByeojdvW8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+					<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/XZiOjSOwQDA?si=Z6HVE-qByeojdvW8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 				</div>
 		  		</div>
 			</div>

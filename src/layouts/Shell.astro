@@ -3,13 +3,15 @@ import Layout from '@layouts/Layout.astro';
 import Navigation from '@components/Navigation.astro';
 import LocaleSwither from '@components/LocaleSwither.astro';
 import { WebsiteConfig } from "../config";
-import { getLangFromUrl, useTranslations } from "../i18n/utils.ts";
+import { useTranslations } from "../i18n/utils.ts";
+import { extractLocaleFromUrl } from "../paraglide/runtime";
 interface Props {
 	title?: string;
 }
 
 const { title } = Astro.props;
-const m = useTranslations(getLangFromUrl(Astro.url));
+const locale = extractLocaleFromUrl(Astro.url);
+const m = useTranslations(locale);
 ---
 
 <Layout title={title}>

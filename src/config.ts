@@ -1,16 +1,82 @@
-
-
-import { getLangFromUrl, useTranslations } from "./i18n/utils.ts";
+import { m } from "./paraglide/messages.js";
+import { type Locale } from "./i18n/utils.ts";
 import UCKLogo from './assets/logo.svg';
 import MicrosoftKoreaVenueImage from '@assets/hall.jpg';
 import UbuntuKoreaLogo from "@assets/UbuntuKorea.svg";
-
-const createTranslation = (locale: string) =>
-    useTranslations(getLangFromUrl(new URL(`/${locale}`, "https://example.org")));
+import type { ImageMetadata } from "astro";
+import { baseLocale } from "./paraglide/runtime.js";
 
 export interface SubMenuItem {
     link: string;
     label: string;
+}
+
+export type Speakers = Array<{
+    db_id: number;
+    user: number;
+}>;
+
+export type WebSiteConfig = {
+    siteTitle: string;
+    siteDescription: string;
+    socialMedia: { [key: string]: string };
+    faviconPath: string;
+    navigation: (locale: Locale) => Array<{
+        label: string;
+        link: string;
+        childs?: SubMenuItem[];
+    }>;
+    subNavigation: Array<{
+        label: string;
+        link: string;
+        childs?: SubMenuItem[];
+    }>;
+    footer: {
+        copyright: string;
+        contactUs: string;
+        srcRepoUrl: string;
+        organizers: Array<{
+            name: string;
+            logoImage: string;
+            link: string;
+            desc?: string;
+        }>;
+    };
+    mainBanner: {
+        showFootnote: boolean;
+        buttons: (locale: Locale) => Array<{
+            label: string;
+            link: string;
+            class?: string;
+            target?: string;
+        }>;
+        logo: ImageMetadata | string;
+    };
+    featuredSpeakers: {
+        indicoExportUrl: string;
+        contributionIds: number[];
+        speakerIds: Speakers;
+        fullSchedulesUrl: string;
+    };
+    timetable: {
+        halls: string[];
+        indicoExportUrl: string;
+        baseUrl: string;
+        showDetails: string;
+        difficulty: {
+            beginner: number[];
+            intermediate: number[];
+            advanced: number[];
+        };
+    };
+    cityBanner: {
+        cityImage: ImageMetadata | string;
+    };
+    blog: {
+        rssFeedUrl: string;
+        viewMoreUrl: string;
+        viewMoreUrlAlternative: string;
+    };
 }
 
 export const WebsiteConfig = {
@@ -20,73 +86,73 @@ export const WebsiteConfig = {
         "twitter": "UbuntuKrOrg"
     },
     faviconPath: UCKLogo.src,
-    navigation: (locale: string) => {
-        const m = createTranslation(locale);
+    navigation: (currentLocale?: Locale) => {
+        const locale = currentLocale ?? baseLocale;
         return [
             {
-                label: m("nav_about"),
+                label: m["nav_about"](),
                 link: `/${locale}/about`,
                 childs: []
             },
             {
-                label: m("nav_venue_safety"),
+                label: m["nav_venue_safety"](),
                 link: `/${locale}/venue-and-safety`,
                 childs: []
             },
             // {
-            //     label: m("nav_programs"),
+            //     label: m["nav_programs"](),
             //     link: "#",
             //     childs: [
             //         {
-            //             label: m("nav_programs_cfp"),
+            //             label: m["nav_programs_cfp"](),
             //             link: "/cfp"
             //         },
             //         {
-            //             label: m("nav_programs_timetable"),
+            //             label: m["nav_programs_timetable"](),
             //             link: `/${locale}/programs/timetable`
             //         },
             //         {
-            //             label: m("nav_programs_speakers"),
+            //             label: m["nav_programs_speakers"](),
             //             link: "https://events.canonical.com/event/126/contributions/speakers"
             //         },
             //         {
-            //             label: m("nav_programs_social"),
+            //             label: m["nav_programs_social"](),
             //             link: "https://github.com/ubuntu-kr/ksp-toolkits/blob/master/ksp/ksp-20250809/readme.md"
             //         },
             //         {
-            //             label: m("nav_programs_lunch"),
+            //             label: m["nav_programs_lunch"](),
             //             link: `/${locale}/programs/lunch`
             //         }
             //     ]
             // },
             // {
-            //     label: m("nav_sponsors"),
+            //     label: m["nav_sponsors"](),
             //     link: "#",
             //     childs: [
             //         {
-            //             label: m("nav_sponsors_become"),
+            //             label: m["nav_sponsors_become"](),
             //             link: `/${locale}/sponsors/become-a-sponsor/`
             //         },
             //         {
-            //             label: m("nav_sponsors_our"),
+            //             label: m["nav_sponsors_our"](),
             //             link: `/${locale}/sponsors/our-sponsors/`
             //         },
             //         {
-            //             label: m("nav_sponsors_patrons"),
+            //             label: m["nav_sponsors_patrons"](),
             //             link: `/${locale}/sponsors/patrons/`
             //         }
             //     ]
             // },
             {
-                label: m("nav_links"),
+                label: m["nav_links"](),
                 link: "#",
                 childs: [
                     {
-                        label: m("nav_links_news"),
+                        label: m["nav_links_news"](),
                         link: "https://discourse.ubuntu-kr.org/c/notice/9",
                     },
                     {
-                        label: m("nav_links_chat"),
+                        label: m["nav_links_chat"](),
                         link: "https://ubuntu-kr.org/chat/",
                     }
                 ]
@@ -94,6 +160,11 @@ export const WebsiteConfig = {
         ];
     },
     subNavigation: [
+        {
+            label: "MiniDebConf Korea",
+            link: "https://busan2025.mini.debconf.org/about/minidc/",
+            childs: []
+        }
         // {
         //     label: "🎟️",
         //     link: "/tickets",
@@ -112,23 +183,23 @@ export const WebsiteConfig = {
     },
     mainBanner: {
         showFootnote: true,
-        buttons: (locale: string) => {
-            const m = createTranslation(locale);
+        buttons: (currentLocale?: Locale) => {
+            const locale = currentLocale ?? baseLocale;
             return [
+                {
+                    label: m["mainBanner_lastyear"](),
+                    link: `https://www.youtube.com/watch?v=Kd43K8vKK-U&list=PLumkkj1MBmYuX9KKrO_T5pnByF23keWCv`,
+                    class: "p-button--positive",
+                    target: "_blank"
+                },
                 // {
-                //     label: m("nav_register"),
-                //     link: `/tickets`,
-                //     class: "p-button--positive",
-                //     target: "_blank"
-                // },
-                // {
-                //     label: m("nav_check_ticket"),
+                //     label: m["nav_check_ticket"](),
                 //     link: "https://event-us.kr/mypage/allevent",
                 //     class: "p-button",
                 //     target: "_blank"
                 // },
                 // {
-                //     label: m("nav_programs_timetable"),
+                //     label: m["nav_programs_timetable"](),
                 //     link: `/${locale}/programs/timetable`,
                 //     class: "p-button"
                 // }
@@ -138,8 +209,8 @@ export const WebsiteConfig = {
     },
     featuredSpeakers: {
         indicoExportUrl: "https://events.canonical.com/export/event/126.json?detail=contributions&occ=yes&pretty=yes",
-        contributionIds: [],
-        speakerIds: [],
+        contributionIds: [] as number[],
+        speakerIds: [] as Speakers,
     //     contributionIds: [27, 5, 16, 9, 2, 8],
     //     speakerIds: [
     //         { db_id: 981, user: 3035 }, { db_id: 979, user: 1123 }, { db_id: 978, user: 939 },
@@ -167,4 +238,4 @@ export const WebsiteConfig = {
         viewMoreUrl: "https://discourse.ubuntu-kr.org/tags/c/notice/9/ubucon-kr-2026",
         viewMoreUrlAlternative: "https://discourse.ubuntu-kr.org/tags/ubucon-kr-2026"
     },
-}
+} satisfies WebSiteConfig;

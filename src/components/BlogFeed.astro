@@ -1,7 +1,9 @@
 ---
 import { WebsiteConfig } from "../config";
 import jsdom from "jsdom";
-import { getLangFromUrl, useTranslations } from "../i18n/utils.ts";
+import { useTranslations } from "../i18n/utils.ts";
+import { extractLocaleFromUrl,  baseLocale } from "../paraglide/runtime";
+
 const { JSDOM } = jsdom;
 const window = new JSDOM().window;
 const blogFeedRaw = await fetch(WebsiteConfig.blog.rssFeedUrl);
@@ -27,7 +29,8 @@ blogItems.sort((a, b) => {
     return 1;
 });
 
-const m = useTranslations(getLangFromUrl(Astro.url));
+const locale = extractLocaleFromUrl(Astro.url);
+const m = useTranslations(locale);
 ---
 
 <div class="row--25-75-on-large">

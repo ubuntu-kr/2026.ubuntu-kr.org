@@ -2,18 +2,19 @@
 import { useState, type MouseEvent } from "react";
 import Markdown from "marked-react";
 import { useTranslations, type Locale } from "../i18n/utils.ts";
+import { baseLocale } from "../paraglide/runtime.js";
 type SponsorLogoAndModalProps = {
     name: string,
     level: string,
     logoImageSrc: string,
-    locale: Locale,
+    locale?: Locale,
     description: string,
     url: string,
     showPopup: Boolean,
     index: number
 }
 export default function SponsorLogoAndModal(props: SponsorLogoAndModalProps) {
-    const m = useTranslations(props.locale);
+    const m = useTranslations(props.locale ?? baseLocale);
     const [modalOpen, setModalOpen] = useState(false);
     const closeHandler = (e: KeyboardEvent|MouseEvent<HTMLButtonElement>) => {
         if (e.type === "click" || (e as KeyboardEvent).key === "Escape") {

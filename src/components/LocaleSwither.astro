@@ -1,16 +1,16 @@
 ---
-import { getRelativeLocaleUrlList } from 'astro:i18n';
-
+import { locales } from "../paraglide/runtime";
 ---
 
 <span class="p-contextual-menu--left">
     <button class="p-contextual-menu__toggle" aria-controls="menu-3" aria-expanded="false" aria-haspopup="true">🌐 {Astro.currentLocale}</button>
     <span class="p-contextual-menu__dropdown" id="menu-3" aria-hidden="true">
       <span class="p-contextual-menu__group">
-        {getRelativeLocaleUrlList().map((locale, index) => {
-            let localeItem = locale.split('/')[1];
+        {locales.map((locale, index) => {
             return (
-              <a class="p-contextual-menu__link" href={Astro.url.pathname.replace(String(Astro.currentLocale), localeItem)}>{localeItem}</a>
+              <a class="p-contextual-menu__link" href={Astro.url.pathname.replace(String(Astro.currentLocale), locale)}>
+                {locale}
+              </a>
             );
         })}
       </span>

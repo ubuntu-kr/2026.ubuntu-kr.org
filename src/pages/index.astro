@@ -1,7 +1,7 @@
 ---
 import { getRelativeLocaleUrlList } from 'astro:i18n';
-import { WebsiteConfig } from 'src/config';
-import { defaultLang } from "../i18n/ui";
+import { WebsiteConfig } from '../config';
+import { baseLocale } from "../paraglide/runtime";
 
 export function getStaticPaths() {
 	return getRelativeLocaleUrlList().map((locale) => {
@@ -11,11 +11,10 @@ export function getStaticPaths() {
 		};
 	});
 }
-
 ---
 <html lang="ko">
     <head>
         <meta charset="utf-8">
-		<meta http-equiv="refresh" content=`0;url=/${defaultLang}/` />
+        <meta http-equiv="refresh" content={`0;url=/${baseLocale}/`} />
         <title>{WebsiteConfig.siteTitle}</title>
     </head>
