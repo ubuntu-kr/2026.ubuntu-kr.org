@@ -1,10 +1,10 @@
-import { m } from "./paraglide/messages.js";
+import * as m from "./paraglide/messages.js";
 import { type Locale } from "./i18n/utils.ts";
 import UCKLogo from './assets/logo.svg';
 import MicrosoftKoreaVenueImage from '@assets/hall.jpg';
 import UbuntuKoreaLogo from "@assets/UbuntuKorea.svg";
 import type { ImageMetadata } from "astro";
-import { baseLocale } from "./paraglide/runtime.js";
+import { baseLocale, setLocale } from "./paraglide/runtime.js";
 
 export interface SubMenuItem {
     link: string;
@@ -88,6 +88,8 @@ export const WebsiteConfig = {
     faviconPath: UCKLogo.src,
     navigation: (currentLocale?: Locale) => {
         const locale = currentLocale ?? baseLocale;
+        setLocale(locale);
+
         return [
             {
                 label: m["nav_about"](),
