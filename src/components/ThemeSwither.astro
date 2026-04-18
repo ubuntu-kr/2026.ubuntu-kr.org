@@ -1,24 +1,18 @@
 ---
-import { locales } from "../paraglide/runtime";
 ---
 
-<span class="p-contextual-menu--left" id="contextual-menu-locale">
-    <button class="p-contextual-menu__toggle" aria-controls="menu-locale" aria-expanded="false" aria-haspopup="true">🌐 {Astro.currentLocale}</button>
-    <span class="p-contextual-menu__dropdown" id="menu-locale" aria-hidden="true">
-      <span class="p-contextual-menu__group">
-        {locales.map((locale) => {
-            return (
-              <a class="p-contextual-menu__link" href={Astro.url.pathname.replace(String(Astro.currentLocale), locale)}>
-                {locale}
-              </a>
-            );
-        })}
-      </span>
+<span class="p-contextual-menu--left" id="contextual-menu-theme">
+  <button class="p-contextual-menu__toggle" aria-controls="menu-theme" aria-expanded="false" aria-haspopup="true">🫗 Theme</button>
+  <span class="p-contextual-menu__dropdown" id="menu-theme" aria-hidden="true">
+    <span class="p-contextual-menu__group">
+      <button class="p-contextual-menu__link" data-theme="light">Light</button>
+      <button class="p-contextual-menu__link" data-theme="dark">Dark</button>
     </span>
   </span>
+</span>
 
-  <script>
-    /**
+<script>
+/**
   Toggles the necessary aria- attributes' values on the menus
   and handles to show or hide them.
   @param {HTMLElement} element The menu link or button.
@@ -50,6 +44,7 @@ function toggleMenu(element: HTMLElement, show: boolean, top?: number) {
 function setupContextualMenu(menu: HTMLElement) {
   const toggle = menu.querySelector('.p-contextual-menu__toggle') as HTMLElement;
   const dropdown = menu.querySelector('.p-contextual-menu__dropdown') as HTMLElement;
+  const buttons = menu.querySelectorAll('.p-contextual-menu__link');
 
   toggle?.addEventListener('click', function(event) {
     event.preventDefault();
@@ -90,6 +85,19 @@ function setupContextualMenu(menu: HTMLElement) {
       toggleMenu(toggle, false);
     }
   });
+
+  buttons.forEach((button: HTMLButtonElement) => {
+    button.addEventListener("click", () => {
+      const theme = button.getAttribute("data-theme") as "light" | "dark" | "paper";
+      console.log(theme);
+
+      if (theme) {
+        window.localStorage.setItem('theme', theme);
+        setTheme(theme);
+        document.body.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  })
 }
 
 /**
@@ -104,5 +112,33 @@ function setupCurrentMenus(contextualMenuSelector: string) {
   }
 }
 
-setupCurrentMenus('#contextual-menu-locale');
+/** 
+ * @param {"dark" | "paper" | "light"} theme Theme of Vanilla Framework.
+ */
+function setTheme(theme: "dark" | "paper" | "light") {
+  switch(theme) {
+    case "dark":
+      document.body.classList.remove("is-paper");
+      document.body.classList.add("is-dark");
+      break;
+    case "paper":
+      document.body.classList.remove("is-dark");
+      document.body.classList.add("is-paper");
+      break;
+    default:
+      document.body.classList.remove("is-dark");
+      document.body.classList.remove("is-paper");
+      break;
+  }
+}
+
+/**
+  Runs default script to set theme
+ */
+if (window && window.localStorage.getItem("theme") === "dark") {
+  setTheme("dark");
+}
+
+setupCurrentMenus('#contextual-menu-theme');
+
 </script>

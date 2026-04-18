@@ -5,6 +5,7 @@ import LocaleSwither from '@components/LocaleSwither.astro';
 import { WebsiteConfig } from "../config";
 import { useTranslations } from "../i18n/utils.ts";
 import { extractLocaleFromUrl } from "../paraglide/runtime";
+import ThemeSwither from '@components/ThemeSwither.astro';
 interface Props {
 	title?: string;
 }
@@ -20,6 +21,7 @@ const m = useTranslations(locale);
     <footer class="l-footer--sticky p-strip--dark">
         <div class="u-fixed-width">
             <LocaleSwither/>
+            <ThemeSwither/>
             <div class="p-logo-section--dense">
                 <div class="p-logo-section__items" style={{ 
                     display: "flex", 
