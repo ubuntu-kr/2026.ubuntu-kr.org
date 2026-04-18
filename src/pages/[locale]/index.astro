@@ -7,7 +7,6 @@ import BlogFeed from '@components/BlogFeed.astro';
 import { WebsiteConfig } from '../../config';
 import { useTranslations } from "../../i18n/utils.ts";
 import { extractLocaleFromUrl } from "../../paraglide/runtime";
-
 import { Image } from 'astro:assets';
 import { getRelativeLocaleUrlList } from 'astro:i18n';
 
@@ -27,56 +26,86 @@ const m = useTranslations(locale);
 
 <Shell title="Home">
 	<MainBanner/>
-		<section class="p-section">
-			<div class="p-section--shallow">
-				<div class="row">
-					<hr class="p-rule">
-				</div>
-		  	<div class="row--50-50">
-				<div class="col">
-					<h2>{m("videoBanner_title")}</h2>
-					<p>{m("videoBanner_description1")}</p>
-					<p>{m("videoBanner_description2")}</p>
-				</div>
-				<div class="col">
-					<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/XZiOjSOwQDA?si=Z6HVE-qByeojdvW8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-				</div>
-		  		</div>
+	<section class="p-section">
+		<div class="grid-row">
+			<hr class="p-rule" />
+		</div>
+		<div class="grid-row">
+			<div class="grid-col-2 grid-col-medium-8">
+				<h2>{m("commonBanner_title").split("<wbr>").map((text, index, arr) => {
+					return (
+						<span>{text}<br /></span>
+					)
+				})}</h2>
 			</div>
-		</section>
+			<div class="grid-col-6 grid-col-medium-8">
+				<div class="p-equal-height-row">
+					<div class="p-equal-height-row__col u-sv2">
+						<div class="p-equal-height-row__item">
+							<div class="p-image-container">
+								<iframe width={512} height={316} src="https://www.youtube-nocookie.com/embed/XZiOjSOwQDA?si=Z6HVE-qByeojdvW8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="u-no-margin--bottom"></iframe>
+							</div>
+							<hr class="p-rule--highlight">
+						</div>
+						<h3 class="p-heading--5 p-equal-height-row__item">{m("videoBanner_title")}</h3>
+						<div class="p-equal-height-row__item">
+							<p>{m("videoBanner_description1")}</p>
+							<p>{m("videoBanner_description2")}</p>
+						</div>
+					</div>
+					<div class="p-equal-height-row__col u-sv2">
+						<div class="p-equal-height-row__item">
+							<div class="p-image-container--16-9 is-cover">
+								<Image
+									class="p-image-container__image"
+									src="https://www.debian.org/Pics/debconf24_group_photo.jpg"
+									alt="DebConf24 group photo with logos"
+									loading="lazy"
+									width={2048}
+									height={1440}
+								/>
+							</div>
+							<hr class="p-rule--highlight">
+						</div>
+						<h3 class="p-heading--5 p-equal-height-row__item">{m("cohostBanner_title")}</h3>
+						<div class="p-equal-height-row__item">
+							<p>{m("cohostBanner_description")}</p>
+							<a href="https://busan2025.mini.debconf.org/about/minidc/">MiniDebConf Busan 2025 ›</a>
+						</div>
+					</div>
+					<div class="p-equal-height-row__col u-sv2">
+						<div class="p-equal-height-row__item">
+							<div class="p-image-container--16-9 is-cover">
+								<Image
+									class="p-image-container__image"
+									src={WebsiteConfig.cityBanner.cityImage}
+									alt="Microsoft Korea Hall"
+									loading="lazy"
+								/>
+							</div>
+							<hr class="p-rule--highlight">
+						</div>
+						<h3 class="p-heading--5 p-equal-height-row__item">{m("travelBanner_title")}</h3>
+						<div class="p-equal-height-row__item">
+							<p>{m("travelBanner_description")}</p>
+							<a href="./venue-and-safety">{m("travelBanner_listitem4")} ›</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<FeaturedSpeakers/>
-	<div class="p-section">
-		<div class="row--50-50-on-large">
-		<hr>
-		<div class="col">
-			<div class="p-section--shallow">
-				<div class="p-image-container--16-9 is-cover p-image-container--3-2-on-medium p-image-container--16-9-on-small">
-					<Image
-						class="p-image-container__image"
-						src={WebsiteConfig.cityBanner.cityImage}
-						alt="Microsoft Korea Hall"
-						loading="lazy"
-						width={800}
-						height={450}
-					/>
-				</div>
-			</div>
-		</div>
-		<div class="col">
-			<div class="p-section--shallow">
-			<h2>{m("travelBanner_title")}</h2>
-			</div>
-			<div class="p-section--shallow">
-			<p>
-				{m("travelBanner_description")}
-			</p>
-			</div>
-			<ul class="p-list--divided">
-				<li class="p-list__item is-ticked"><a href="./venue-and-safety">{m("travelBanner_listitem4")}</a></li>
-			</ul>
-		</div>
-		</div>
-	</div>
 	<BlogFeed/>
 	<Sponsors/>
 </Shell>
+
+
+<style lang="scss">
+
+.p-equal-height-row__item .p-image-container iframe {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16/9;
+}
+</style>
