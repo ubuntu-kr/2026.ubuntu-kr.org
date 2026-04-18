@@ -3,29 +3,43 @@ import { Image } from "astro:assets";
 import { WebsiteConfig } from "../config";
 import { useTranslations } from "../i18n/utils.ts";
 import { extractLocaleFromUrl } from "../paraglide/runtime";
+import mainVenue from "@assets/main.jpg";
 
 const locale = extractLocaleFromUrl(Astro.url);
 const m = useTranslations(locale);
 ---
-<div class="p-suru--fan-bottom">
-    <div class="row--75-25">
+<div class="p-section--hero">
+    <div class="row--50-50-on-large">
       <div class="col">
-        <h1>{WebsiteConfig.siteTitle}</h1>
-        <h2>{m("mainBanner_dates")}</h2>
-        <h2>{m("mainBanner_venue")}</h2>
-        <p>{m("mainBanner_description")}</p>
-        <p><small>{WebsiteConfig.mainBanner.showFootnote ? m("mainBanner_footnote") :""}</small></p>
-        {WebsiteConfig.mainBanner.buttons(locale).map((buttonConfig)=>(
-            <a href={buttonConfig.link} target={buttonConfig.target ?? "_self"}>
-                <button class={buttonConfig.class} style={{ marginBottom: "0.25rem" }}>
-                    {buttonConfig.label}
-                </button>
-            </a>
-        ))}
+        <Image src={WebsiteConfig.mainBanner.logo} decoding="async" loading="eager" alt="" width={50} />
+        <h1 class="u-no-margin--bottom">
+          {WebsiteConfig.siteTitle}
+        </h1>
+        <p class="u-no-margin--bottom">
+          <span class="p-text--small u-text--muted">{m("mainBanner_cohost")}</span>
+        </p>
       </div>
       <div class="col">
-        <Image src={WebsiteConfig.mainBanner.logo} decoding="async" loading="eager"
-          style="padding-top: 30px; max-width: 250px;" alt="" width={250}/>
+        <div class="p-section--shallow">
+          <h2>{m("mainBanner_dates")}</h2>
+          <h2>{m("mainBanner_venue")}</h2>
+          <p>{m("mainBanner_description")}</p>
+          <p><small>{WebsiteConfig.mainBanner.showFootnote ? m("mainBanner_footnote") :""}</small></p>
+        </div>
+        <div class="p-section--shallow">
+          {WebsiteConfig.mainBanner.buttons(locale).map((buttonConfig)=>(
+              <a href={buttonConfig.link} target={buttonConfig.target ?? "_self"}>
+                  <button class={buttonConfig.class} style={{ marginBottom: "0.25rem" }}>
+                      {buttonConfig.label}
+                  </button>
+              </a>
+          ))}          
+        </div>
+      </div>
+      <div>
+        <div class="p-image-container--cinematic is-cover">
+         <Image src={mainVenue} class="p-image-container__image" decoding="async" loading="eager" alt={m("mainBanner_image_alt")}/>
+        </div>
       </div>
     </div>
   </div>
