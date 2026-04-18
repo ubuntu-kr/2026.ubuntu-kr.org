@@ -86,7 +86,7 @@ function setupContextualMenu(menu: HTMLElement) {
     }
   });
 
-  buttons.forEach((button: HTMLButtonElement) => {
+  buttons.forEach((button) => {
     button.addEventListener("click", () => {
       const theme = button.getAttribute("data-theme") as "light" | "dark" | "paper";
       console.log(theme);
