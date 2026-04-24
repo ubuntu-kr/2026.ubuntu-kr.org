@@ -38,7 +38,7 @@ const m = useTranslations(locale);
     </div>
     <div>
       <div class="p-image-container--cinematic is-cover">
-        <Image src={mainVenue} class="p-image-container__image" decoding="async" loading="eager" alt={m("mainBanner_image_alt")}/>
+        <Image src={mainVenue} class="p-image-container__image" decoding="async" loading="eager" fetchpriority={"high"} alt={m("mainBanner_image_alt")} layout={"constrained"}/>
       </div>
     </div>
   </div>

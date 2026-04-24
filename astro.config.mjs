@@ -26,7 +26,7 @@ export default defineConfig({
     ],
   },
   image: {
-    domains: ["events.canonical.com"],
+    domains: ["events.canonical.com", "www.debian.org"],
     remotePatterns: [{ protocol: "https" }]
   },
   site: "https://2026.ubuntu-kr.org",
