@@ -28,10 +28,8 @@ const m = useTranslations(locale);
       </div>
       <div class="p-section--shallow">
         {WebsiteConfig.mainBanner.buttons(locale).map((buttonConfig)=>(
-            <a href={buttonConfig.link} target={buttonConfig.target ?? "_self"}>
-                <button class={buttonConfig.class} style={{ marginBottom: "0.25rem" }}>
-                    {buttonConfig.label}
-                </button>
+            <a href={buttonConfig.link} target={buttonConfig.target ?? "_self"} class={buttonConfig.class}>
+                {buttonConfig.label}
             </a>
         ))}          
       </div>
