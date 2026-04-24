@@ -13,7 +13,6 @@ export type Speakers = Array<{
 export type WebSiteConfig = {
     siteTitle: string;
     siteDescription: string;
-    siteBaseUrl: string;
     socialMedia: { [key: string]: string };
     faviconPath: string;
     navigation: (locale: Locale) => Array<{

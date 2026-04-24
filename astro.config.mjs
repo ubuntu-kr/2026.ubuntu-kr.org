@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
-import { WebsiteConfig } from './src/config';
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 
@@ -30,5 +29,5 @@ export default defineConfig({
     domains: ["events.canonical.com"],
     remotePatterns: [{ protocol: "https" }]
   },
-  site: WebsiteConfig.siteBaseUrl
+  site: "https://2026.ubuntu-kr.org",
 });

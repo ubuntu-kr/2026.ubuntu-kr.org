@@ -9,7 +9,6 @@ import type { Speakers, WebSiteConfig } from "./types/config.types.ts";
 export const WebsiteConfig = {
     siteTitle: "UbuCon Korea 2026",
     siteDescription: "Microsoft Korea, Seoul | August 29th",
-    siteBaseUrl: "https://2026.ubuntu-kr.org",
     socialMedia: {
         "twitter": "UbuntuKrOrg"
     },
@@ -55,24 +54,24 @@ export const WebsiteConfig = {
             //         }
             //     ]
             // },
-            // {
-            //     label: m["nav_sponsors"](),
-            //     link: "#",
-            //     childs: [
-            //         {
-            //             label: m["nav_sponsors_become"](),
-            //             link: `/${locale}/sponsors/become-a-sponsor/`
-            //         },
-            //         {
-            //             label: m["nav_sponsors_our"](),
-            //             link: `/${locale}/sponsors/our-sponsors/`
-            //         },
-            //         {
-            //             label: m["nav_sponsors_patrons"](),
-            //             link: `/${locale}/sponsors/patrons/`
-            //         }
-            //     ]
-            // },
+            {
+                label: m["nav_sponsors"](),
+                link: "#",
+                childs: [
+                    {
+                        label: m["nav_sponsors_become"](),
+                        link: `/${locale}/sponsors/become-a-sponsor/`
+                    },
+                    {
+                        label: m["nav_sponsors_our"](),
+                        link: `/${locale}/sponsors/our-sponsors/`
+                    },
+                    {
+                        label: m["nav_sponsors_patrons"](),
+                        link: `/${locale}/sponsors/patrons/`
+                    }
+                ]
+            },
             {
                 label: m["nav_links"](),
                 link: "#",
