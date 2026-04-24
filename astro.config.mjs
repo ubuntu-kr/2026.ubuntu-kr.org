@@ -1,15 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
+import { WebsiteConfig } from './src/config';
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    react(),
-    mdx(),
-  ],
+  integrations: [react(), mdx(), sitemap()],
   i18n: {
     defaultLocale: "ko",
     locales: ["en", "ko"],
@@ -22,6 +22,7 @@ export default defineConfig({
       paraglideVitePlugin({
         project: "./project.inlang",
         outdir: "./src/paraglide",
+        emitTsDeclarations: true,
       }),
     ],
   },
@@ -29,4 +30,5 @@ export default defineConfig({
     domains: ["events.canonical.com"],
     remotePatterns: [{ protocol: "https" }]
   },
+  site: WebsiteConfig.siteBaseUrl
 });
