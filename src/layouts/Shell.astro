@@ -18,7 +18,7 @@ const m = useTranslations(locale);
 <Layout title={title}>
 	<Navigation/>
 	<slot />
-    <footer class="l-footer--sticky p-strip--dark">
+    <footer class="l-footer--sticky p-strip--dark" role="contentinfo">
         <div class="u-fixed-width">
             <LocaleSwither/>
             <ThemeSwither/>
@@ -89,7 +89,7 @@ const m = useTranslations(locale);
                     }
                 </div>
             </div>
-            <nav class="grid-row" aria-label="Footer" role="contentinfo">
+            <nav class="grid-row" aria-label="Footer">
                 <div class="has-cookie">
                     <p>
                         {WebsiteConfig.footer.copyright}

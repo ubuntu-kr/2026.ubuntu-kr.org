@@ -7,7 +7,7 @@ import { extractLocaleFromUrl } from "../paraglide/runtime";
 const locale = extractLocaleFromUrl(Astro.url);
 ---
 
-<header id="navigation" class="p-navigation is-dark" role="navigation">
+<header id="navigation" class="p-navigation is-dark" role="banner">
     <div class="p-navigation__row--25-75">
         <div class="p-navigation__banner">
             <div class="p-navigation__tagged-logo">
@@ -29,7 +29,7 @@ const locale = extractLocaleFromUrl(Astro.url);
                 class="p-navigation__toggle--close" aria-haspopup="menu" aria-expanded="true"
                 title="close menu"><i class="p-icon--chevron-up"></i></a>
         </div>
-        <nav class="p-navigation__nav" aria-label="Navigation">
+        <nav class="p-navigation__nav" aria-label="Navigation" role="navigation">
             <ul class="p-navigation__items" aria-label="주요 메뉴">
             {WebsiteConfig.navigation(locale).map((navItem, index) => (
                 navItem.childs.length <= 0 ? (
