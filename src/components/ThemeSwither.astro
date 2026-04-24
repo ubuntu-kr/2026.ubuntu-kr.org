@@ -112,10 +112,12 @@ function setupCurrentMenus(contextualMenuSelector: string) {
   }
 }
 
+type Theme = "dark" | "paper" | "light"
+
 /** 
  * @param {"dark" | "paper" | "light"} theme Theme of Vanilla Framework.
  */
-function setTheme(theme: "dark" | "paper" | "light") {
+function setTheme(theme: Theme) {
   switch(theme) {
     case "dark":
       document.body.classList.remove("is-paper");
@@ -135,8 +137,16 @@ function setTheme(theme: "dark" | "paper" | "light") {
 /**
   Runs default script to set theme
  */
-if (window && window.localStorage.getItem("theme") === "dark") {
-  setTheme("dark");
+if (window) {
+  if (window.localStorage.getItem("theme")) {
+    const theme = ["dark", "paper", "light"].includes(
+      window.localStorage.getItem("theme") ?? "light ")
+      ? window.localStorage.getItem("theme") as Theme : "light";
+
+    setTheme(theme);
+  } else if (!window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    setTheme("light");
+  }
 }
 
 setupCurrentMenus('#contextual-menu-theme');

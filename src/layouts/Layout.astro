@@ -32,7 +32,7 @@ const { title, description } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title ? `${title} | ${WebsiteConfig.siteTitle}` : WebsiteConfig.siteTitle}</title>
 	</head>
-	<body>
+	<body class="is-dark">
 		<slot />
 	</body>
 </html>
