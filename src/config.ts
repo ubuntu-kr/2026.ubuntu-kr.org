@@ -1,6 +1,7 @@
 import * as m from "./paraglide/messages.js";
 import { type Locale } from "./i18n/utils.ts";
 import UCKLogo from './assets/logo.svg';
+import DebianLogo from './assets/Debian.svg';
 import MicrosoftKoreaVenueImage from './assets/hall.jpg';
 import UbuntuKoreaLogo from "./assets/UbuntuKorea.svg";
 import { baseLocale, setLocale } from "./paraglide/runtime.js";
@@ -108,6 +109,7 @@ export const WebsiteConfig = {
         srcRepoUrl: "https://github.com/ubuntu-kr/2026.ubuntu-kr.org",
         organizers: [
             { name: "Ubuntu Korea Community", logoImage: UbuntuKoreaLogo.src, link: "https://www.ubuntu-kr.org", desc: undefined },
+            { name: "Debian", logoImage: DebianLogo.src, link: "https://wiki.debian.org/LocalGroups/DebianKorea?action=show&redirect=DebianKorea", desc: undefined }
         ]
     },
     mainBanner: {
