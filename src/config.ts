@@ -94,14 +94,14 @@ export const WebsiteConfig = {
             label: "MiniDebConf Korea",
             link: "https://busan2025.mini.debconf.org/about/minidc/",
             childs: []
-        }
-        // {
-        //     label: "🎟️",
-        //     link: "/tickets",
-        //     childs: [
+        },
+        {
+            label: "🎟️",
+            link: "/tickets",
+            childs: [
 
-        //     ]
-        // }
+            ]
+        }
     ],
     footer: {
         copyright: "© 2025-Present Ubuntu Korea Community. Ubuntu and Canonical are registered trademarks of Canonical Ltd. Unless otherwise noted, content licensed under CC BY 4.0 source code under MIT.",
@@ -118,17 +118,17 @@ export const WebsiteConfig = {
             const locale = currentLocale ?? baseLocale;
             return [
                 {
-                    label: m["mainBanner_lastyear"](),
-                    link: `https://www.youtube.com/watch?v=Kd43K8vKK-U&list=PLumkkj1MBmYuX9KKrO_T5pnByF23keWCv`,
+                    label: m["nav_buy_ticket"](),
+                    link: "https://2026.ubuntu-kr.org/tickets",
                     class: "p-button--positive",
                     target: "_blank"
                 },
-                // {
-                //     label: m["nav_check_ticket"](),
-                //     link: "https://event-us.kr/mypage/allevent",
-                //     class: "p-button",
-                //     target: "_blank"
-                // },
+                {
+                    label: m["mainBanner_lastyear"](),
+                    link: `https://www.youtube.com/watch?v=Kd43K8vKK-U&list=PLumkkj1MBmYuX9KKrO_T5pnByF23keWCv`,
+                    class: "p-button",
+                    target: "_blank"
+                },
                 // {
                 //     label: m["nav_programs_timetable"](),
                 //     link: `/${locale}/programs/timetable`,
