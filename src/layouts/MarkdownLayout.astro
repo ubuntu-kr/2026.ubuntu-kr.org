@@ -12,7 +12,7 @@ const { frontmatter } = Astro.props;
     }
 </style>
 <Shell title={frontmatter.title}>
-    <div class="p-section p-strip is-shallow">
+    <div class="p-section p-strip is-shallow" role="article">
         <div class="grid-row">
             <h1>{frontmatter.title}</h1>
             <p>{frontmatter.description}</p>
