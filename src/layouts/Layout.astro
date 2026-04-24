@@ -35,6 +35,7 @@ const { title, description } = Astro.props;
 	<body class="is-dark">
 		<slot />
 	</body>
+	<script src="https://loopback.social/banner.js" data-color="#262626" defer></script>
 </html>
 <style lang="scss" is:global>
 // Import the framework
@@ -72,5 +73,9 @@ body {
 	position: fixed;
 	bottom: 0rem;
 	right: 1rem;
+}
+
+.gtb-dropdown-toggle, .view-all-news {
+	margin-bottom: 0;
 }
 </style>
