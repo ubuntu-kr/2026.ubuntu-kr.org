@@ -11,6 +11,10 @@ export const patrons = [
         name: "문성준",
         org: "-"
     },
+    {
+        name: "정재훈",
+        org: "DSM Corp. MONOLITH Division"
+    }
 ]
 
 export const ukc = [
