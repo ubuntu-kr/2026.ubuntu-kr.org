@@ -14,18 +14,20 @@ const blogFeedXml = new window.DOMParser().parseFromString(
 const blogItemsXml = blogFeedXml.querySelectorAll("item");
 const blogItems = new Array();
 blogItemsXml.forEach((el: Element) => {
+  if (el.querySelector("category")?.textContent !== "일정") {
     blogItems.push({
-        title: el.querySelector("title")?.textContent,
-        link: el.querySelector("link")?.textContent,
-        date: el.querySelector("pubDate")?.textContent,
-        content: el.querySelector("description")?.textContent?.replace(/(<([^>]+)>)/gi, ""),
+      title: el.querySelector("title")?.textContent,
+      link: el.querySelector("link")?.textContent,
+      date: el.querySelector("pubDate")?.textContent,
+      content: el.querySelector("description")?.textContent?.replace(/(<([^>]+)>)/gi, ""),
     });
+  }
 });
 
 blogItems.sort((a, b) => {
   if (Date.parse(a.date) > Date.parse(b.date))
     return -1;
-    else
+  else
     return 1;
 });
 
@@ -34,46 +36,47 @@ const m = useTranslations(locale);
 ---
 
 <div class="row--25-75-on-large">
-    <hr class="p-rule">
-    <div class="col">
-      <a target="_blank"
-        href={blogItems.length > 0 ? WebsiteConfig.blog.viewMoreUrl : WebsiteConfig.blog.viewMoreUrlAlternative}>
-        <h2 class="p-link--soft">
-          {m("blogBanner_title")}
-        </h2>
-      </a>
-    </div>
+  <hr class="p-rule">
+  <div class="col">
+    <a target="_blank"
+      href={blogItems.length > 0 ? WebsiteConfig.blog.viewMoreUrl : WebsiteConfig.blog.viewMoreUrlAlternative}>
+      <h2 class="p-link--soft">
+        {m("blogBanner_title")}
+      </h2>
+    </a>
+  </div>
   
-    <div class="col">
-      <div class="p-equal-height-row">
-        {blogItems.length > 0 ? blogItems.slice(0, 3).map((item) => (
-            <div class="p-equal-height-row__col">
-              <a href={item.link} target="_blank" class="p-link--soft p-equal-height-row__col">
-                <h3 class="p-equal-height-row__item">
-                    {item.title}
-                    <i class="p-icon--external-link"></i>
-                </h3>
-                <p class="p-equal-height-row__item" style="text-overflow: ellipsis; overflow: hidden; max-height: 5em;">
-                    {item.content}
-                </p>
-                <hr />
-                <p class="p-equal-height-row__item auto-format-datetime">
-                    {item.date}
-                </p>
-              </a>
-            </div>
-        )) : <div class="p-equal-height-row__col">
-            <p class="p-equal-height-row__item">
-              {m("blogBanner_empty")}
-            </p>
+  <div class="col">
+    <div class="p-equal-height-row">
+      {blogItems.length > 0 ? blogItems.slice(0, 3).map((item) => (
+          <div class="p-equal-height-row__col">
+            <a href={item.link} target="_blank" class="p-link--soft p-equal-height-row__col">
+              <h3 class="p-equal-height-row__item">
+                  {item.title}
+                  <i class="p-icon--external-link"></i>
+              </h3>
+              <p class="p-equal-height-row__item" style="text-overflow: ellipsis; overflow: hidden; max-height: 5em;">
+                  {item.content}
+              </p>
+              <hr />
+              <p class="p-equal-height-row__item auto-format-datetime">
+                  {item.date}
+              </p>
+            </a>
           </div>
-          }
+        )) : 
+        <div class="p-equal-height-row__col">
+          <p class="p-equal-height-row__item">
+            {m("blogBanner_empty")}
+          </p>
+        </div>
+      }
       </div>
     </div>
   </div>
 
 <script>
 document.querySelectorAll(".auto-format-datetime").forEach((element)=>{
-    element.innerHTML = new Date(element.innerHTML).toLocaleString();
+  element.innerHTML = new Date(element.innerHTML).toLocaleString();
 });
 </script>
