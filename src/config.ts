@@ -29,14 +29,14 @@ export const WebsiteConfig = {
                 link: `/${locale}/venue-and-safety`,
                 childs: []
             },
-            // {
-            //     label: m["nav_programs"](),
-            //     link: "#",
-            //     childs: [
-            //         {
-            //             label: m["nav_programs_cfp"](),
-            //             link: "/cfp"
-            //         },
+            {
+                label: m["nav_programs"](),
+                link: "#",
+                childs: [
+                    {
+                        label: m["nav_programs_cfp"](),
+                        link: "/cfp"
+                    },
             //         {
             //             label: m["nav_programs_timetable"](),
             //             link: `/${locale}/programs/timetable`
@@ -53,8 +53,8 @@ export const WebsiteConfig = {
             //             label: m["nav_programs_lunch"](),
             //             link: `/${locale}/programs/lunch`
             //         }
-            //     ]
-            // },
+                ]
+            },
             {
                 label: m["nav_sponsors"](),
                 link: "#",
@@ -98,9 +98,7 @@ export const WebsiteConfig = {
         {
             label: "🎟️",
             link: "/tickets",
-            childs: [
-
-            ]
+            childs: []
         }
     ],
     footer: {
@@ -120,6 +118,12 @@ export const WebsiteConfig = {
                 {
                     label: m["nav_buy_ticket"](),
                     link: "https://2026.ubuntu-kr.org/tickets",
+                    class: "p-button--positive",
+                    target: "_blank"
+                },
+                {
+                    label: m["nav_programs_cfp"](),
+                    link: "https://2026.ubuntu-kr.org/cfp",
                     class: "p-button--positive",
                     target: "_blank"
                 },
