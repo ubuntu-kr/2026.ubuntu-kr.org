@@ -5,6 +5,7 @@
   <button class="p-contextual-menu__toggle" aria-controls="menu-theme" aria-expanded="false" aria-haspopup="true">🫗 Theme</button>
   <span class="p-contextual-menu__dropdown" id="menu-theme" aria-hidden="true">
     <span class="p-contextual-menu__group">
+      <button class="p-contextual-menu__link" data-theme="system">System</button>
       <button class="p-contextual-menu__link" data-theme="light">Light</button>
       <button class="p-contextual-menu__link" data-theme="dark">Dark</button>
     </span>
@@ -88,7 +89,7 @@ function setupContextualMenu(menu: HTMLElement) {
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      const theme = button.getAttribute("data-theme") as "light" | "dark" | "paper";
+      const theme = button.getAttribute("data-theme") as "light" | "dark" | "paper" | "system";
       console.log(theme);
 
       if (theme) {
@@ -112,40 +113,65 @@ function setupCurrentMenus(contextualMenuSelector: string) {
   }
 }
 
-type Theme = "dark" | "paper" | "light"
+type Theme = "dark" | "paper" | "light" | "system";
 
 /** 
- * @param {"dark" | "paper" | "light"} theme Theme of Vanilla Framework.
+ * @param theme Theme of Vanilla Framework.
  */
 function setTheme(theme: Theme) {
   switch(theme) {
     case "dark":
       document.body.classList.remove("is-paper");
       document.body.classList.add("is-dark");
+      deobserveThemeChange();
       break;
     case "paper":
       document.body.classList.remove("is-dark");
       document.body.classList.add("is-paper");
+      deobserveThemeChange();
       break;
+    case "system":
+      observeThemeChange();
+    case "light":
     default:
       document.body.classList.remove("is-dark");
       document.body.classList.remove("is-paper");
+      document.body.classList.add("is-light");
       break;
   }
+}
+
+const systemThemeMode = window.matchMedia("(prefers-color-scheme: dark)");
+
+function observeThemeChange() {
+  
+  systemThemeMode.addEventListener("change", (e: MediaQueryListEvent) => {
+    if (e.matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  });
+}
+
+function deobserveThemeChange() {
+  systemThemeMode.removeEventListener("change", () => {});
 }
 
 /**
   Runs default script to set theme
  */
 if (window) {
-  if (window.localStorage.getItem("theme")) {
+  const themeSettings = window.localStorage.getItem("theme")
+
+  if (themeSettings && themeSettings !== "system") {
     const theme = ["dark", "paper", "light"].includes(
-      window.localStorage.getItem("theme") ?? "light ")
+      window.localStorage.getItem("theme") ?? "light")
       ? window.localStorage.getItem("theme") as Theme : "light";
 
     setTheme(theme);
-  } else if (!window.matchMedia("(prefers-color-scheme: dark)").matches) {
-    setTheme("light");
+  } else {
+    setTheme("system");
   }
 }
 
