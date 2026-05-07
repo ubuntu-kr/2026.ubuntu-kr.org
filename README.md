@@ -1,6 +1,6 @@
 # UbuCon Korea 2026
 
-본 웹사이트는 우분투한국커뮤니티의 연례 가장 큰 행사인 UbuCon Korea 2026 개최를 위해 제작된 웹사이트로, 현재 이전 UbuCon Korea 2025 디자인을 기반으로 하고 있습니다. (* 수정 예정)
+본 웹사이트는 우분투한국커뮤니티의 연례 가장 큰 행사인 UbuCon Korea 2026 개최를 위해 제작된 웹사이트입니다.
 
 [우분투 디자인 가이드](https://design.ubuntu.com)에 따라 색상과 글꼴을 적용하고 있으며, 원활한 구현을 위해 [Vanilla Framework](https://vanillaframework.io)를 사용합니다.
 
@@ -11,6 +11,7 @@
 - Indico API를 기반으로 자체 시간표 페이지를 제공하고 있습니다.
 - 우분투한국커뮤니티 Discourse가 존재함에 따라, 최근 소식을 Discourse에서 불러오도록 설정되어 있습니다.
 - 조직위원회, 최근 소식 등 일부 UI를 다르게 변경하여 적용 중에 있습니다.
+- 다크모드 및 미디어 쿼리에 따른 자동 테마 변경을 지원합니다. (localStorage & Event Listener 기반)
 
 > 여기에 기재되지 않은 자잘한 변경사항도 포함되어 있습니다.
 
@@ -30,7 +31,7 @@
 
 - 후원사 소개 데이터가 담긴 `/data/sponsors.ts`에서 일부 항목은 정상적인 줄바꿈과 문법 적용을 위해 들여쓰기가 독특한 형태로 되어 있습니다. 해당 부분을 수정할 경우 코드 블럭 등의 예기치 못한 방식으로 표현될 수 있으므로 수정 후 개발 서버로 구동되는 웹페이지에서 결과를 반드시 확인해주세요.
 - 일주일 이상 전에 동기화하신 경우에는, 충돌 최소화를 위해 가급적 원본 소스와의 동기화 후 작업하시기를 권장드립니다.
-- 2025와 달리, Paraglide 서비스를 임시 제거하였습니다. 향후 SSG 지원 여부에 따라 다른 서비스를 이용하거나, 재적용될 예정입니다.
+- Paraglide의 경우 SSG는 공식 지원 단계가 아니나, [Static Site Generation](https://inlang.com/m/gerre34r/library-inlang-paraglideJs/static-site-generation#astro-middleware) 문서에 활성화 방법이 명시되어 있어 적용되어 있습니다. 단, 이전 작업의 흔적으로 일부 API가 일반적인 Paraglide와 달라 해당 부분을 고치는 작업이 예정되어 있습니다.
 
 ## 기타 기여 방법
 
