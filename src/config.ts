@@ -37,6 +37,10 @@ export const WebsiteConfig = {
                         label: m["nav_programs_cfp"](),
                         link: "/cfp"
                     },
+                    {
+                        label: m["nav_programs_cfp_mdc"](),
+                        link: "https://deb.li/kr26cfp"
+                    }
             //         {
             //             label: m["nav_programs_timetable"](),
             //             link: `/${locale}/programs/timetable`
@@ -124,6 +128,12 @@ export const WebsiteConfig = {
                 {
                     label: m["nav_programs_cfp"](),
                     link: "https://2026.ubuntu-kr.org/cfp",
+                    class: "p-button--positive",
+                    target: "_blank"
+                },
+                {
+                    label: m["nav_programs_cfp_mdc"](),
+                    link: "https://deb.li/kr26cfp",
                     class: "p-button--positive",
                     target: "_blank"
                 },
