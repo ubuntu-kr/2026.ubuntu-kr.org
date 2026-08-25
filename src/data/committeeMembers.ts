@@ -146,6 +146,15 @@ export const committeeMembers: CommitteeMember[] = [
         profileImageUrl: uck26Logo.src
     },
     {
+        name: "신도윤",
+        team: "Debian",
+        role: [
+            "role_mdc",
+            "role_venue_safety"
+        ],
+        profileImageUrl: "https://avatars.githubusercontent.com/u/60532811?v=4"
+    },
+    {
         name: "김종민",
         team: "Debian, DebConf Committee",
         role: [
