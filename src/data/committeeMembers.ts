@@ -22,7 +22,7 @@ export const committeeMembers: CommitteeMember[] = [
     },
     {
         name: "차의서",
-        team: "우분투한국커뮤니티",
+        team: "Debian, 우분투한국커뮤니티",
         role: [
             "role_mdc",
             "role_sponsorship_finances",
@@ -32,7 +32,7 @@ export const committeeMembers: CommitteeMember[] = [
     },
     {
         name: "방기연",
-        team: "C++ Korea",
+        team: "Debian, C++ Korea",
         role: [
             "role_web_video",
             "role_venue_safety",
@@ -147,7 +147,7 @@ export const committeeMembers: CommitteeMember[] = [
     },
     {
         name: "김종민",
-        team: "Debian",
+        team: "Debian, DebConf Committee",
         role: [
             "role_mdc",
             "role_venue_safety"
