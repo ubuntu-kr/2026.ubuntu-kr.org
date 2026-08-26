@@ -75,10 +75,10 @@ export const WebsiteConfig = {
                         label: m["nav_programs_speakers"](),
                         link: "https://events.canonical.com/event/153/contributions/speakers"
                     },
-            //         {
-            //             label: m["nav_programs_social"](),
-            //             link: "https://github.com/ubuntu-kr/ksp-toolkits/blob/master/ksp/ksp-20250809/readme.md"
-            //         },
+                    {
+                        label: m["nav_programs_social"](),
+                        link: "https://github.com/ubuntu-kr/ksp-toolkits/blob/master/ksp/ksp-20260829/readme.md"
+                    },
                     {
                         label: m["nav_programs_lunch"](),
                         link: `/${locale}/programs/lunch`
