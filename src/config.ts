@@ -38,7 +38,7 @@ export const WebsiteConfig = {
                 link: "#",
                 childs: [
                     {
-                        label: m["nav_buy_ticket"](),
+                        label: m["nav_register"](),
                         link: "https://2026.ubuntu-kr.org/tickets",
                     },
                     {
@@ -141,15 +141,9 @@ export const WebsiteConfig = {
             const locale = currentLocale ?? baseLocale;
             return [
                 {
-                    label: m["nav_buy_ticket"](),
-                    link: "https://2026.ubuntu-kr.org/tickets",
-                    class: "p-button--positive",
-                    target: "_blank"
-                },
-                {
                     label: m["nav_check_ticket"](),
                     link: "https://event-us.kr/mypage/allevent",
-                    class: "p-button",
+                    class: "p-button--positive",
                     target: "_blank"
                 },
                 {
