@@ -7,6 +7,7 @@ import UbuntuKoreaLogo from "./assets/UbuntuKorea.svg";
 import YangSooYoonProfile from "./assets/speakers/1332.png";
 import FlorentianaYuwonoProfile from "./assets/speakers/1333.png";
 import MinjinParkProfile from "./assets/speakers/1373.png";
+import SungjoonMoonProfile from "./assets/speakers/1368.png";
 import { baseLocale, setLocale } from "./paraglide/runtime.js";
 import type { WebSiteConfig } from "./types/config.types.ts";
 
@@ -166,6 +167,7 @@ export const WebsiteConfig = {
         contributionIds: [979, 948, 975],
         speakerPictures: {
             1373: MinjinParkProfile,
+            1368: SungjoonMoonProfile,
             1333: FlorentianaYuwonoProfile,
             1332: YangSooYoonProfile,
         } as Record<number, ImageMetadata>,
