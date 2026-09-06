@@ -24,7 +24,7 @@ const m = useTranslations(locale);
         <h2 class="p-heading--2">{m("mainBanner_dates")}</h2>
         <h3 class="p-heading--2">{m("mainBanner_venue")}</h3>
         <p>{m("mainBanner_description")}</p>
-        <!-- <p><small>{WebsiteConfig.mainBanner.showFootnote ? m("mainBanner_footnote") :""}</small></p> -->
+        <p><small>{WebsiteConfig.mainBanner.showFootnote ? m("mainBanner_footnote") :""}</small></p>
       </div>
       <div class="p-section--shallow">
         {WebsiteConfig.mainBanner.buttons(locale).map((buttonConfig)=>(
